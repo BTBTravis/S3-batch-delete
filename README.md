@@ -29,18 +29,22 @@ D. Use the aws cli `s3 rm `...
 ## How to use
 
 1. get a list of files you need to delete via the aws cli, `aws s3 ls s3://bucket-example`
-  * sometimes this can take a while and will need to run on a server overnight
-1. clone the repo somewhere and build the scripts, see [Dev](#dev)
-1. check you list of objects file and make sure there is nothing in there you don't want to delete
-  * text editors like [ed](https://en.wikipedia.org/wiki/Ed_(text_editor)) come in handy for this
-    sort of editing because million+ line files kill a lot of text editors
-1. split up this cleaned up file with `./create_files.sh --split 80000 --output ./del_files_dir s3_ls.txt`
-  * the split number should be approx the number items you are seeking delete divided by 10 so that
-    10 processes are started and not more so you don't reach api rate limit
-1. now that we have files delete the objects with `./del_files --bucket bucket-example ./del_files_dir`
-  * this will start up the processes in the background but there will output to the current terminal
-    so often its a good idea to do such things on a server after running `screen` to start up a
-    detachable terminal that can run overnight. Tip: `Ctrl-D` is default for detaching.
+    * sometimes this can take a while and will need to run on a server overnight
+
+2. clone the repo somewhere and build the scripts, see [Dev](#dev)
+
+3. check you list of objects file and make sure there is nothing in there you don't want to delete
+    * text editors like [ed](https://en.wikipedia.org/wiki/Ed_(text_editor)) come in handy for this
+      sort of editing because million+ line files kill a lot of text editors
+
+4. split up this cleaned up file with `./create_files.sh --split 80000 --output ./del_files_dir s3_ls.txt`
+    * the split number should be approx the number items you are seeking delete divided by 10 so that
+      10 processes are started and not more so you don't reach api rate limit
+
+5. now that we have files delete the objects with `./del_files --bucket bucket-example ./del_files_dir`
+    * this will start up the processes in the background but there will output to the current terminal
+      so often its a good idea to do such things on a server after running `screen` to start up a
+      detachable terminal that can run overnight. Tip: `Ctrl-D` is default for detaching.
 
 
 ## Dev
